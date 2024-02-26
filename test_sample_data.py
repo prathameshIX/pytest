@@ -4,7 +4,7 @@ import pytest
 
 @pytest.fixture
 def spark_session():
-   return SparkSession.builder.appName("TestTransformation").getOrCreate()
+   return SparkSession.builder.appName("Test_sample_data").getOrCreate()
   
 def test_transformation(spark_session):
    input_data = [("Alice", 25, "New York"), ("Bob", 30, "San Francisco")]
