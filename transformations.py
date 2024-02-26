@@ -12,4 +12,4 @@ def perform_transformations(file1_path, file2_path):
 
 result_df = perform_transformations("file1.csv", "file2.csv")
 result_df.show()
-spark.stop()
+print("Dataframe Created")
