@@ -1,4 +1,4 @@
-from transformation_script import transform_data
+from sample_data import transform_data
 from pyspark.sql import SparkSession
 import pytest
 
