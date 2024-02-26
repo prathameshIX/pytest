@@ -10,5 +10,6 @@ def perform_transformations(file1_path, file2_path):
    narrowed_df = grouped_df.select('countyCode', col('sum(column1)').alias('total_column1'), col('avg(column2)').alias('average_column2'))
    return narrowed_df
 
-result_df = perform_transformations("file1.csv", "file2.csv")
+result_df = perform_transformations("countyData.csv", "fullData.csv")
 result_df.show()
+print("Dataframe Created")
