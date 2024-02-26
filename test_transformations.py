@@ -1,23 +1,22 @@
 import pytest
-from transformations import perform_transformations
+from transformation import perform_transformations
 @pytest.fixture
 def sample_data(spark):
-   file1_path = "sample_data/countyData.csv"
-   file2_path = "sample_data/fullData.csv"
-   df1 = spark.read.csv(file1_path, header=True, inferSchema=True)
-   df2 = spark.read.csv(file2_path, header=True, inferSchema=True)
-   df1.createOrReplaceTempView("test_df1")
-   df2.createOrReplaceTempView("test_df2")
-   yield df1, df2
-
+   country_data_path = "https://raw.githubusercontent.com/pytest_repository/pytest/main/sample_data/countryData.csv"
+   full_data_path = "https://raw.githubusercontent.com/pytest_repository/pytest/main/sample_data/fullData.csv"
+   country_df = spark.read.csv(country_data_path, header=True, inferSchema=True)
+   full_df = spark.read.csv(full_data_path, header=True, inferSchema=True)
+   country_df.createOrReplaceTempView("test_country_df")
+   full_df.createOrReplaceTempView("test_full_df")
+   yield country_df, full_df
 def test_transformations_with_tables(spark, sample_data):
-   df1, df2 = sample_data
-   result_df = perform_transformations("test_df1", "test_df2")
+   country_df, full_df = sample_data
+   result_df = perform_transformations("test_country_df", "test_full_df")
    assert result_df.count() > 0
-
+   
 def test_sql_transformations_with_tables(spark, sample_data):
-   df1, df2 = sample_data
-   result_df = perform_transformations("test_df1", "test_df2")
+   country_df, full_df = sample_data
+   result_df = perform_transformations("test_country_df", "test_full_df")
    result_df.createOrReplaceTempView("test_table")
    sql_result = spark.sql("SELECT * FROM test_table WHERE total_column1 > 0")
    assert sql_result.count() > 0
