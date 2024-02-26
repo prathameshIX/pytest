@@ -9,7 +9,7 @@ def transform_data(spark, input_data):
    
 if __name__ == "__main__":
    spark = SparkSession.builder.appName("DataTransformation").getOrCreate()
-   sample_data = [("Alice", 25, "New York"), ("Bob", 30, "San Francisco")]
+   sample_data = [("Jay", 25, "Mumbai"), ("Rahul", 30, "Pune"),("ANiket",34,"Aurangabad")]
    result_df = transform_data(spark, sample_data)
    result_df.show()
    spark.stop()
