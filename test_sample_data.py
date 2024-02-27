@@ -9,4 +9,4 @@ def spark_session():
 def test_transformation(spark_session):
    input_data = [("Alice", 25, "New York"), ("Bob", 30, "San Francisco")]
    result_df = transform_data(spark_session, input_data)
-   assert "city" in result_df.columns, "Column renaming failed"
+   assert "loaction" in result_df.columns, "Column renaming failed"
